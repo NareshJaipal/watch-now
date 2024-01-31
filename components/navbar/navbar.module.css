@@ -33,6 +33,20 @@
     object-fit: cover;
   }
   
+  .backBtn{
+    font-size: 50px;
+    text-align: center;
+    margin: -10px 4px;
+    padding-bottom: 10px;
+    line-height: 30px;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+  }
+
+  .backBtn:hover{
+    background-color: #cacaca;
+  }
+
   .navItems {
     display: flex;
     flex-direction: row;
@@ -87,7 +101,7 @@
     border-radius: 40px;
     background-color: transparent;
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.68, -0.15, 0.225, 1.05);
+    transition: all 0.3s ease-in-out;
   }
   
   .searchBarOpen {
@@ -225,6 +239,16 @@
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
+    animation: 0.4s rotateProfileImage ease-in-out;
+  }
+
+  @keyframes rotateProfileImage {
+    0%{
+      transform: rotate(90deg);
+    }
+    100%{
+      transform: rotate(0deg);
+    }
   }
 
   .userName {

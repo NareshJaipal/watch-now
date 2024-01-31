@@ -1,0 +1,135 @@
+.container{
+    display: block;
+    height: 100vh;
+}
+
+.modal {
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    margin: 0px auto;
+    width: 800px;
+    bottom: 40px;
+    background-color: #fcfcfc;
+    /* background-color: #787878; */
+    top: 70px;
+
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid var(--white30);
+}
+
+.overlay{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.backBtn{
+    background-color: #fafafa;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    width: 120px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.backArrow{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.borderBoxShadow{
+    -webkit-box-shadow: 0 3px 7px var(--shadow20);
+    -moz-box-shadow: 0 3px 7px var(--shadow20);
+    box-shadow: 0 3px 7px var(--shadow20);
+
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip: padding-box;
+
+    opacity: 1;
+    background: linear-gradient(to top, var(--black10), transparent 50%);
+
+}
+
+.videoPlayer{
+    border-radius: 10px 10px 0px 0px;
+    composes: borderBoxShadow;
+}
+
+.additionalInfoWrapper{
+    padding: 0 3rem;
+}
+
+.additionalInfo{
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    column-gap: 2em;
+}
+
+.col1{
+    max-height: 208px; 
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.publishTime{
+    font-size: 18px;
+    line-height: 28px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    color: var(--green10);
+}
+
+.title{
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--black10);
+    font-weight: bold;
+}
+
+.description{
+    margin-top: 8px;
+    margin-bottom: 12px;
+    color: #303030;
+}
+
+.col2{
+    color: var(--black10);
+    line-height: 28px;
+    display: flex;
+    flex-direction: column;
+}
+
+.subTitle{
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 0px;
+    overflow-wrap: break-word;
+    margin-top: 24px;
+}
+
+.subTitleText{
+    color: var(--gray10);
+}
+
+.channelName{
+    color: var(--black10);
+    margin: 0px;
+}
+
+@media (max-width: 768px) {
+    .modal{
+        width: 100%;
+    }
+}
+
+@media (max-width: 370px) {
+    .col1{
+        max-height: 265px;
+    }
+}

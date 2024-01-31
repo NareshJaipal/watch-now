@@ -7,7 +7,8 @@ import { magic } from "../../lib/magic-client";
 
 import styles from "./navbar.module.css";
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { logo = false } = props;
   const [showDropdown, setShowDropdown] = useState("");
   const [dropDownOn, setDropDownOn] = useState(true);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
@@ -15,6 +16,7 @@ const NavBar = () => {
   const [hideLogo, setHideLogo] = useState(false);
   const [hideNavItems, setHideNavItems] = useState(false);
   const [email, setEmail] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const router = useRouter();
 
@@ -34,19 +36,23 @@ const NavBar = () => {
 
   const handleSearchBar = (e) => {
     e.preventDefault();
-    setSearchBarOpen(!searchBarOpen);
-    setshow(true);
-    setHideLogo(!hideLogo);
-    setHideNavItems(!hideNavItems);
 
-    // if (searchBarOpen) {
-    //   console.log("Search Bar is opened");
-    // } else {
-    //   setSearchBarOpen(true);
-    //   setshow(true);
-    //   setHideLogo(true);
-    //   setHideNavItems(true);
-    // }
+    if (searchBarOpen) {
+      if (searchQuery !== "") {
+        router.push(`/searchResult/${searchQuery}`);
+      }
+    } else {
+      setSearchBarOpen(true);
+      setshow(true);
+      setHideLogo(true);
+      setHideNavItems(true);
+    }
+  };
+
+  const handleOnChangeSearchQuery = (e) => {
+    e.preventDefault();
+    console.log("Search Query: ", e.target.value);
+    setSearchQuery(e.target.value);
   };
 
   const handleSearchClose = (e) => {
@@ -82,6 +88,22 @@ const NavBar = () => {
       router.push("/login");
     }
   };
+
+  const handleGoBack = (e) => {
+    e.preventDefault();
+    router.back();
+  };
+
+  const handleHomePage = (e) => {
+    e.preventDefault();
+    router.push("/");
+  };
+
+  const handleFavoritePage = (e) => {
+    e.preventDefault();
+    router.push("/favorite");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -89,16 +111,22 @@ const NavBar = () => {
           className={`${styles.logoLink} ${hideLogo ? styles.hideLogo : ""}`}
           href="/"
         >
-          <div className={styles.logoWrapper}>
-            <Image
-              className={styles.logo}
-              src={"/static/logo.png"}
-              width="115"
-              height="60"
-              alt="Logo"
-              priority="false"
-            />
-          </div>
+          {logo ? (
+            <div className={styles.logoWrapper}>
+              <Image
+                className={styles.logo}
+                src={"/static/logo.png"}
+                width="115"
+                height="60"
+                alt="Logo"
+                priority="false"
+              />
+            </div>
+          ) : (
+            <div onClick={handleGoBack} className={styles.backBtn}>
+              ←
+            </div>
+          )}
         </Link>
 
         <ul
@@ -106,7 +134,7 @@ const NavBar = () => {
             hideNavItems ? styles.hideNavItems : ""
           }`}
         >
-          <li className={styles.navItem}>
+          <li className={styles.navItem} onClick={handleHomePage}>
             <Image
               className={styles.navItemIcon}
               src={"/static/icons/home.svg"}
@@ -116,7 +144,7 @@ const NavBar = () => {
             />
             <span className={styles.navItemName}>Home</span>
           </li>
-          <li className={styles.navItem}>
+          <li className={styles.navItem} onClick={handleFavoritePage}>
             <Image
               className={styles.navItemIcon}
               src={"/static/icons/favorite.svg"}
@@ -149,6 +177,7 @@ const NavBar = () => {
                 type="text"
                 name="search"
                 placeholder="Search here..."
+                onChange={handleOnChangeSearchQuery}
               />
               <span className={styles.search} onClick={handleSearchBar}>
                 <Image

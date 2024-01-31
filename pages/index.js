@@ -34,7 +34,9 @@ export default function Home({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <NavBar />
+        <NavBar logo={true} />
+
+        {/* Sections */}
         <div className={styles.sectionWrapper}>
           <SectionCard title="Disney" videos={disneyVideos} size="larg" />
         </div>

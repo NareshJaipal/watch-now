@@ -79,13 +79,15 @@ button {
   --gray20: rgb(156, 163, 175);
   --gray40: rgba(42, 42, 42, 0.6);
 
-  --white10: rgba(255, 255, 255, 1);
-  --white20: rgba(243, 244, 246, 1);
-  --white30: rgb(209, 213, 219);
+  --white10: rgba(255, 255, 255, 2);
+  --white20: rgba(243, 244, 246, 2);
+  --white30: rgba(243, 244, 246, 2);
+  --white40: rgba(243, 244, 246, 9);
+  --white50: rgb(209, 213, 219);
 
   --green10: rgba(110, 231, 183, 1);
-  --shadow10: rgba(0, 0, 0, 0.3);
-  --shadow20: rgba(158, 155, 155, 0.3);
+  --shadow10: rgba(255, 255, 255, 0.3);
+  --shadow20: rgba(155, 158, 155, 0.3);
   --shadow30: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
