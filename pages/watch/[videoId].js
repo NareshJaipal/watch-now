@@ -3,28 +3,42 @@ import Modal from "react-modal";
 
 import styles from "../../styles/watch.module.css";
 import NavBar from "../..//components/navbar/navbar";
+import { getVideoDetailsById } from "../../lib/videos";
 
-const Video = () => {
-  const router = useRouter();
-  console.log({ router });
+Modal.setAppElement("#__next");
 
-  const video = {
-    title: "Page Title",
-    description:
-      "this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing this is a text that i am writting for testing",
-    publishTime: "10-06-2003",
-    channelName: "Disney Hub",
-    viewCount: 1000,
+export async function getStaticProps(context) {
+  console.log({ context });
+  const videoId = context.params.videoId;
+  const videoDetails = await getVideoDetailsById(videoId);
+
+  console.log("Video Details: ", videoDetails[0]);
+
+  return {
+    props: {
+      video: videoDetails.length > 0 ? videoDetails[0] : {},
+    },
+    revalidate: 10,
   };
+}
 
+export async function getStaticPaths() {
+  const listOfVideos = ["YXqQ_uqd_yI", "a6IIhwZv4ls"];
+
+  const paths = listOfVideos.map((videoId) => ({
+    params: {
+      videoId,
+    },
+  }));
+  return { paths, fallback: "blocking" };
+}
+
+const Video = ({ video }) => {
+  const router = useRouter();
   const { title, description, publishTime, channelName, viewCount } = video;
   return (
     <div className={styles.container}>
       <NavBar />
-
-      {/* <div className={styles.backBtn}>
-        <span className={styles.backArrow}>←</span> <span>go back</span>
-      </div> */}
       <Modal
         isOpen={true}
         contentLabel="Example Modal"
