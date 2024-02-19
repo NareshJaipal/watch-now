@@ -25,7 +25,6 @@ export default function Home({
   productivityVideos,
   popularVideos,
 }) {
-  console.log("Disney Videos: ", disneyVideos);
   return (
     <>
       <Head>

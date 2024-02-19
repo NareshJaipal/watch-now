@@ -20,10 +20,18 @@ const NavBar = (props) => {
 
   const router = useRouter();
 
+  // "WyIweDM3YzQ0MzA5ZmMzMTNlMDE0N2Y1M2M3M2EzMDQyNWFjM2UwMjA1YTNhMmYwNTJkYWFmNWMyZGE4MDdhODNkOWUzOTU2MzNlYmIyMTM1ZjhkZjY2OTMxODQyZjM5ZDkzYjcwYWM4ZTgwZjUxNzkwNDdmOTAxMjE4NDA0M2IyMmQ0MWMiLCJ7XCJpYXRcIjoxNzA4MDU5MTY2LFwiZXh0XCI6MTcwODA2MDA2NixcImlzc1wiOlwiZGlkOmV0aHI6MHgzNzBCNTcwNDk0M2FjNkZDZDI1ZTVDNzJCMDBlNUYwNUJmRkQzN0IxXCIsXCJzdWJcIjpcImJBLU45cE9xeHhLSlN3Ym9mcFVUSHRTbzhnTTZzNU1KWmZIaTZsRGlWNDQ9XCIsXCJhdWRcIjpcInVaZTN4Vkx5LUJIOWtjVGFVTUZzTEVhS25EdE1ZUk8tbGhJY043SkQ1a3M9XCIsXCJuYmZcIjoxNzA4MDU5MTY2LFwidGlkXCI6XCI5Y2U3ZTM4Zi05Y2U5LTQ5NGMtYTYwZi05NjJhZDJkNWQxN2RcIixcImFkZFwiOlwiMHgyZjczM2RjMDg0NDZiYWQ5MjYwNGVlODdkYmFjYTk4ZDI4ODE2M2Y0OGZiZTkxMmU0OWVmNzhiMjJlYzcxY2E3NDc2NzdkNGRlYzk3ZTRhNjkxNjM0MmVlZjI0NDc4OTIyNDJjODNmYmQ4ZTIyZWRjMDg0ODA2N2FmM2VjODBkMDFjXCJ9Il0="
+
   const getUserData = async () => {
     try {
       const userInfo = await magic.user.getInfo();
-      console.log("UserInfo", userInfo.email);
+
+      console.log({ userInfo });
+      console.log("email", userInfo.email);
+
+      const didToken = await magic.user.getIdToken();
+      console.log({ didToken });
+
       setEmail(userInfo.email);
     } catch (e) {
       console.error("Error in Meta Data: ", e);
