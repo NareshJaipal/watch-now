@@ -11,10 +11,8 @@ export default function App({ Component, pageProps }) {
     try {
       const isLoggedIn = await magic.user.isLoggedIn();
       if (isLoggedIn) {
-        // route to dashboard
         router.push("/");
       } else {
-        // route to login page
         router.push("/login");
       }
     } catch (error) {

@@ -2,17 +2,17 @@ import { useRouter } from "next/router";
 import Modal from "react-modal";
 
 import styles from "../../styles/watch.module.css";
-import NavBar from "../..//components/navbar/navbar";
+import NavBar from "../../components/navbar/navbar";
 import { getVideoDetailsById } from "../../lib/videos";
+import Like from "../../components/icons/like-icon";
+import DisLike from "../../components/icons/dislike-icon";
+import { useEffect, useState } from "react";
 
 Modal.setAppElement("#__next");
 
 export async function getStaticProps(context) {
-  console.log({ context });
   const videoId = context.params.videoId;
   const videoDetails = await getVideoDetailsById(videoId);
-
-  console.log("Video Details: ", videoDetails[0]);
 
   return {
     props: {
@@ -35,7 +35,60 @@ export async function getStaticPaths() {
 
 const Video = ({ video }) => {
   const router = useRouter();
+  const videoId = router.query.videoId;
   const { title, description, publishTime, channelName, viewCount } = video;
+  const [toggleLike, setToggleLike] = useState(false);
+  const [toggleDisLike, setToggleDisLike] = useState(false);
+
+  useEffect(async () => {
+    const response = await fetch(`/api/stats?videoId=${videoId}`, {
+      method: "GET",
+    });
+    const data = await response.json();
+    if (data.length > 0) {
+      const favorited = data[0].favorited;
+      if (favorited === 1) {
+        setToggleLike(true);
+      } else if (favorited === 0) {
+        setToggleDisLike(true);
+      }
+    }
+  }, []);
+
+  const runRatingService = async (favorited) => {
+    return await fetch("/api/stats/", {
+      method: "POST",
+      body: JSON.stringify({
+        videoId,
+        favorited,
+        watched: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+  const handleToggleLike = async (e) => {
+    e.preventDefault();
+    setToggleLike(!toggleLike);
+    setToggleDisLike(toggleLike);
+
+    const favorited = !toggleLike ? 1 : 0;
+
+    const response = await runRatingService(favorited);
+  };
+
+  const handleToggleDisLike = async (e) => {
+    e.preventDefault();
+    setToggleDisLike(!toggleDisLike);
+    setToggleLike(toggleDisLike);
+
+    const favorited = !toggleDisLike ? 0 : 1;
+
+    const response = await runRatingService(favorited);
+  };
+
   return (
     <div className={styles.container}>
       <NavBar />
@@ -52,9 +105,25 @@ const Video = ({ video }) => {
           type="text/html"
           width="100%"
           height="360"
-          src={`https://www.youtube.com/embed/${router.query.videoId}?autoplay=0&origin=http://example.com&controls=0&rel=0`}
-          frameborder="0"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=0&origin=http://example.com&controls=0&rel=0`}
+          frameBorder="0"
         />
+
+        {/*! working */}
+        <div className={styles.likeDisLikeBtnWrapper}>
+          <div className={styles.likeBtnWrapper}>
+            <button onClick={handleToggleLike}>
+              <div className={styles.btnWrapper}>
+                <Like selected={toggleLike} />
+              </div>
+            </button>
+          </div>
+          <button onClick={handleToggleDisLike}>
+            <div className={styles.btnWrapper}>
+              <DisLike selected={toggleDisLike} />
+            </div>
+          </button>
+        </div>
 
         <div className={styles.additionalInfoWrapper}>
           <div className={styles.additionalInfo}>

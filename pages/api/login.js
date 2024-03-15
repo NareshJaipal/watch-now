@@ -5,14 +5,11 @@ import { setTokenCookie } from "../../lib/cookie";
 
 export default async function (req, res) {
   if (req.method === "POST") {
-    console.log("Method is post");
     try {
       const auth = req.headers.authorization;
       const didToken = auth ? auth.substr(7) : "";
 
       const metaData = await magicAdmin.users.getMetadataByToken(didToken);
-      console.log({ metaData });
-
       const token = jwt.sign(
         {
           ...metaData,
@@ -26,15 +23,12 @@ export default async function (req, res) {
         },
         process.env.JWT_SECRET
       );
-      // console.log({ token });
 
-      // Is New User
       const isNewUserQuery = await isNewUser(token, metaData.issuer);
 
       isNewUserQuery && (await createNewUser(token, metaData));
 
       const cookie = setTokenCookie(token, res);
-      console.log({ cookie });
 
       res.send({ done: true });
     } catch (error) {
@@ -44,7 +38,6 @@ export default async function (req, res) {
         .send({ message: `Sometshing went wrong in logging in, ${error}` });
     }
   } else {
-    console.log("Method is noooooooooot post");
     res.send({ message: "method is not POST" });
   }
 }
