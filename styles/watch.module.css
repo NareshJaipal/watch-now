@@ -14,10 +14,9 @@
   width: 100%;
 
   background-color: #fefefe;
-  /* background-color: #787878; */
   outline: none;
   border-radius: 10px;
-  border: 1px solid var(--white30);
+  border: 1px solid var(--white50);
 }
 
 .overlay {
@@ -68,7 +67,6 @@
   width: 60px;
   height: 60px;
   padding: 8px;
-  /* margin: 20px; */
 
   border-radius: 50%;
   border: 5px solid white;

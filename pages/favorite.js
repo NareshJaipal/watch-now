@@ -3,6 +3,7 @@ import SectionCard from "..//components/card/section-card";
 import styles from "../styles/favorite.module.css";
 import { getWatchItAgainVideos, getMyFavoritedVideos } from "../lib/videos";
 import redirectUser from "../utils/redirectUser";
+import Head from "next/head";
 
 export async function getServerSideProps(context) {
   const { userId, token } = await redirectUser(context);
@@ -17,23 +18,32 @@ export async function getServerSideProps(context) {
 
 const Favorite = ({ watchItAgainVideos, favoritedVideos }) => {
   return (
-    <div>
-      <NavBar />
-      <div className={styles.sectionWrapper}>
-        <SectionCard
-          title="Liked Videos"
-          videos={favoritedVideos}
-          size="normal"
+    <>
+      <Head>
+        <title>My Favorites - Watch Now</title>
+        <meta
+          name="description"
+          content="Watch your favorite videos, revisit clips you enjoyed, and manage your Watch Now favorites list on Watch Now by Naresh Jaipal"
         />
-      </div>
-      <div className={styles.sectionWrapper}>
-        <SectionCard
-          title="Watch it again"
-          videos={watchItAgainVideos}
-          size="normal"
-        />
-      </div>
-    </div>
+      </Head>
+      <main>
+        <NavBar />
+        <div className={styles.sectionWrapper}>
+          <SectionCard
+            title="Liked Videos"
+            videos={favoritedVideos}
+            size="normal"
+          />
+        </div>
+        <div className={styles.sectionWrapper}>
+          <SectionCard
+            title="Watch it again"
+            videos={watchItAgainVideos}
+            size="normal"
+          />
+        </div>
+      </main>
+    </>
   );
 };
 

@@ -9,6 +9,8 @@ import styles from "./navbar.module.css";
 
 const NavBar = (props) => {
   const { logo = false } = props;
+  const user_profile = "/static/user_profile_icon.avif";
+
   const [showDropdown, setShowDropdown] = useState("");
   const [dropDownOn, setDropDownOn] = useState(true);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
@@ -201,7 +203,7 @@ const NavBar = (props) => {
           <div className={styles.userProfileWrapper}>
             <Image
               className={styles.userProfile}
-              src={"https://avatars.githubusercontent.com/u/132568227?v=4"}
+              src={user_profile}
               alt="User"
               width={45}
               height={45}
@@ -230,7 +232,7 @@ const NavBar = (props) => {
               </div>
               <Image
                 className={styles.profileImage}
-                src={"https://avatars.githubusercontent.com/u/132568227?v=4"}
+                src={user_profile}
                 width={200}
                 height={200}
                 alt="Profile Pic"

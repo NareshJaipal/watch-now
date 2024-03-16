@@ -69,46 +69,52 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>SignIn</title>
+        <title>Sign In - Watch Now</title>
+        <meta
+          name="description"
+          content="Sign in to Watch Now account to access your favorite movies and shows on Watch Now by Naresh Jaipal"
+        />
       </Head>
-      <header className={styles.header}>
-        <div className={styles.headerWrapper}>
-          <a href="/" className={styles.logoLink}>
-            <div className={styles.logoWrapper}>
-              <Image
-                className={styles.logo}
-                src={"/static/logo.png"}
-                width="115"
-                height="60"
-                alt="Logo"
-                priority="false"
-              />
-            </div>
-          </a>
+      <main>
+        <header className={styles.header}>
+          <div className={styles.headerWrapper}>
+            <a href="/" className={styles.logoLink}>
+              <div className={styles.logoWrapper}>
+                <Image
+                  className={styles.logo}
+                  src={"/static/logo.png"}
+                  width="115"
+                  height="60"
+                  alt="Logo"
+                  priority="false"
+                />
+              </div>
+            </a>
+          </div>
+        </header>
+        <div className={styles.main}>
+          <div className={styles.mainWrapper}>
+            <h1 className={styles.signInHeader}>Sign In</h1>
+            <input
+              type="text"
+              placeholder="Email address"
+              className={styles.inputEmail}
+              onChange={handleOnChangeEmail}
+            />
+            <p className={styles.userMsg}>{userMsg}</p>
+            {isLoading ? (
+              <button className={styles.loadingButton}>Loading...</button>
+            ) : (
+              <button
+                onClick={handleSignInWithEmail}
+                className={styles.signInButton}
+              >
+                Sign In
+              </button>
+            )}
+          </div>
         </div>
-      </header>
-      <div className={styles.main}>
-        <div className={styles.mainWrapper}>
-          <h1 className={styles.signInHeader}>Sign In</h1>
-          <input
-            type="text"
-            placeholder="Email address"
-            className={styles.inputEmail}
-            onChange={handleOnChangeEmail}
-          />
-          <p className={styles.userMsg}>{userMsg}</p>
-          {isLoading ? (
-            <button className={styles.loadingButton}>Loading...</button>
-          ) : (
-            <button
-              onClick={handleSignInWithEmail}
-              className={styles.signInButton}
-            >
-              Sign In
-            </button>
-          )}
-        </div>
-      </div>
+      </main>
     </div>
   );
 };

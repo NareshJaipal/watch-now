@@ -1,60 +1,45 @@
-.container{
-    color: var(--blue20);
-    background-color: --var(--black50);
-    padding-left: 1rem;
-    padding-right: 1rem;
+.container {
+  color: var(--blue20);
+  background-color: --var(--black50);
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.title{
-    color: #0d0d0d;
-    font-weight: 700;
-    font-size: 2rem;
+.title {
+  color: #0d0d0d;
+  font-weight: 700;
+  font-size: 2rem;
 }
 
-.cardWrapper{
-    display: flex;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 12px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+.cardWrapper {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 12px;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
-/* .cardWrapper::-webkit-scrollbar{
-    height: 10px;
-    background-color: #eeeeee;
-    border-radius: 4px;
+.wrap {
+  flex-wrap: wrap;
 }
 
-.cardWrapper::-webkit-scrollbar-thumb{
-    background-color: #cccccc;
-    border-radius: 5px;
-}
-.cardWrapper::-webkit-scrollbar-thumb:hover{
-    border: 1px solid #aaaaaa;
-    background-color: #eeeeee;
-} */
-
-.wrap{
-    flex-wrap: wrap;
+.mb3 {
+  margin-bottom: 3rem;
 }
 
-.mb3{
-    margin-bottom: 3rem;
+.mb2 {
+  margin-bottom: 2rem;
 }
 
-.mb2{
-    margin-bottom: 2rem;
+.cardImg:hover {
+  z-index: 50;
 }
 
-.cardImg:hover{
-    z-index: 50;
-}
-
-@media(min-width: 768px){
-    .container{
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
+@media (min-width: 768px) {
+  .container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
 }

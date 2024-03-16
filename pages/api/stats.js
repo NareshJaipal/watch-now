@@ -4,7 +4,6 @@ import {
   findVideoIdByUser,
 } from "@/lib/db/hasura";
 import { verifyToken } from "../../lib/utils";
-import { redirect } from "next/dist/server/api-utils";
 
 export default async function stats(req, res) {
   try {

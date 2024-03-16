@@ -5,6 +5,7 @@ import NavBar from "../../components/navbar/navbar";
 import styles from "../../styles/searchResult.module.css";
 import { getVideos } from "../../lib/videos";
 import Card from "../../components/card/card";
+import Head from "next/head";
 
 export async function getServerSideProps(context) {
   const searchQuery = context.query.searchResult;
@@ -24,6 +25,13 @@ const SearchResult = (searchResults) => {
 
   return (
     <div>
+      <Head>
+        <title>{searchQuery} - Search Results on Watch Now</title>
+        <meta
+          name="description"
+          content={`Find videos related to ${searchQuery} on Watch Now by Naresh Jaipal. Discover trailers, clips, and more.`}
+        />
+      </Head>
       <NavBar />
 
       <section className={styles.container}>
