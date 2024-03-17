@@ -33,11 +33,12 @@ export default async function (req, res) {
       res.send({ done: true });
     } catch (error) {
       console.error("something went wrong in logging in", error);
-      res
-        .status(500)
-        .send({ message: `Sometshing went wrong in logging in, ${error}` });
+      res.status(500).send({
+        done: false,
+        message: `Sometshing went wrong in logging in, ${error}`,
+      });
     }
   } else {
-    res.send({ message: "method is not POST" });
+    res.send({ done: false, message: "method is not POST" });
   }
 }

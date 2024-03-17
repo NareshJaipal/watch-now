@@ -1,12 +1,13 @@
 import "@/styles/globals.css";
 import { useEffect, useState } from "react";
+
 import { magic } from "../lib/magic-client";
 import { useRouter } from "next/router";
 import Loading from "../components/loading/loading";
 
-export default function App({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const handleLoggedIn = async () => {
@@ -35,3 +36,5 @@ export default function App({ Component, pageProps }) {
 
   return isLoading ? <Loading /> : <Component {...pageProps} />;
 }
+
+export default MyApp;

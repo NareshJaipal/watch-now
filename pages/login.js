@@ -15,7 +15,7 @@ const Login = () => {
 
   useEffect(() => {
     const handleComplete = () => {
-      setIsLoading(true);
+      setIsLoading(false);
     };
 
     router.events.on("routeChangeComplete", handleComplete);
@@ -35,6 +35,7 @@ const Login = () => {
 
   const handleSignInWithEmail = async (e) => {
     e.preventDefault();
+
     if (email) {
       try {
         setIsLoading(true);
@@ -77,20 +78,16 @@ const Login = () => {
       </Head>
       <main>
         <header className={styles.header}>
-          <div className={styles.headerWrapper}>
-            <a href="/" className={styles.logoLink}>
-              <div className={styles.logoWrapper}>
-                <Image
-                  className={styles.logo}
-                  src={"/static/logo.png"}
-                  width="115"
-                  height="60"
-                  alt="Logo"
-                  priority="false"
-                />
-              </div>
-            </a>
-          </div>
+          <a href="/" className={styles.logoLink}>
+            <Image
+              className={styles.logo}
+              src={"/static/logo.png"}
+              width="115"
+              height="60"
+              alt="Logo"
+              priority="false"
+            />
+          </a>
         </header>
         <div className={styles.main}>
           <div className={styles.mainWrapper}>
