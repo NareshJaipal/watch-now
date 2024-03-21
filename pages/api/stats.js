@@ -17,6 +17,7 @@ export default async function stats(req, res) {
       const userId = await verifyToken(token);
       const findVideo = await findVideoIdByUser(token, userId, videoId);
       const doesStatsExist = findVideo?.length > 0;
+
       if (req.method === "POST") {
         const { favorited = 0, watched = false } = req.body;
         if (doesStatsExist) {
@@ -31,7 +32,7 @@ export default async function stats(req, res) {
           const response = await createNewStats(token, {
             userId,
             videoId,
-            favorited: 0,
+            favorited,
           });
           res.send({ done: true, decodeToken, doesStatsExist, response });
         }

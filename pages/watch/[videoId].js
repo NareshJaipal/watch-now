@@ -24,7 +24,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const listOfVideos = ["YXqQ_uqd_yI", "a6IIhwZv4ls"];
+  const listOfVideos = ["mYfJxlgR2jw", "4zH5iYM4wJo", "KCPEHsAViiQ"];
 
   const paths = listOfVideos.map((videoId) => ({
     params: {
@@ -41,19 +41,23 @@ const Video = ({ video }) => {
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleDisLike, setToggleDisLike] = useState(false);
 
-  useEffect(async () => {
-    const response = await fetch(`/api/stats?videoId=${videoId}`, {
-      method: "GET",
-    });
-    const data = await response.json();
-    if (data.length > 0) {
-      const favorited = data[0].favorited;
-      if (favorited === 1) {
-        setToggleLike(true);
-      } else if (favorited === 0) {
-        setToggleDisLike(true);
+  useEffect(() => {
+    async function getRatingFromStats() {
+      const response = await fetch(`/api/stats?videoId=${videoId}`, {
+        method: "GET",
+      });
+      const data = await response.json();
+      if (data.length > 0) {
+        const favorited = data[0].favorited;
+        if (favorited === 1) {
+          setToggleLike(true);
+        } else if (favorited === 0) {
+          setToggleDisLike(true);
+        }
       }
     }
+
+    getRatingFromStats();
   }, []);
 
   const runRatingService = async (favorited) => {
@@ -93,28 +97,17 @@ const Video = ({ video }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{video.title} - Watch Now</title>
+        <title>{title} - Watch Now</title>
         <meta
           name="description"
-          content={`${video.description} - Watch Now by Naresh Jaipal`}
+          content={`${description} - Watch Now by Naresh Jaipal`}
         />
-
-        <script type="application/ld+json">
-          {{
-            "@context": "https://schema.org",
-            "@type": "VideoObject",
-            name: `${video.title}`,
-            description: `${video.description}`,
-            uploadDate: `${video.publishTime}`,
-            embedUrl: `https://www.youtube.com/embed/${videoId}`,
-          }}
-        </script>
       </Head>
       <main>
         <NavBar />
         <Modal
           isOpen={true}
-          contentLabel="Example Modal"
+          contentLabel="Watch Now Video Play Model"
           onRequestClose={() => router.back()}
           className={styles.modal}
           overlayClassName={styles.overlay}

@@ -30,15 +30,16 @@ const Favorite = ({ watchItAgainVideos, favoritedVideos }) => {
         <NavBar />
         <div className={styles.sectionWrapper}>
           <SectionCard
-            title="Liked Videos"
-            videos={favoritedVideos}
+            title="Watch it again"
+            videos={watchItAgainVideos}
             size="normal"
           />
         </div>
+
         <div className={styles.sectionWrapper}>
           <SectionCard
-            title="Watch it again"
-            videos={watchItAgainVideos}
+            title="Liked Videos"
+            videos={favoritedVideos}
             size="normal"
           />
         </div>

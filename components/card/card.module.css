@@ -1,44 +1,44 @@
-.container{
-    margin-right: 4px;
-    cursor: pointer;
+.container {
+  margin-right: 4px;
+  cursor: pointer;
 }
 
-.imgMotionWrapper{
-    position: relative;
-    display: inline-block;
+.imgMotionWrapper {
+  position: relative;
+  display: inline-block;
 }
 
-.imgMotionWrapper:hover{
-    z-index: 90;
+.imgMotionWrapper:hover {
+  z-index: 1;
 }
 
-.largItem{
-    position: relative;
-    width: 180px;
-    min-width: 180px;
-    height: 320px;
-    min-height: 320px;
+.largItem {
+  position: relative;
+  width: 180px;
+  min-width: 180px;
+  height: 320px;
+  min-height: 320px;
 }
 
-.normalItem{
-    position: relative;
-    width: 300px;
-    min-width: 300px;
-    height: 170px;
-    min-height: 170px;
+.normalItem {
+  position: relative;
+  width: 300px;
+  min-width: 300px;
+  height: 170px;
+  min-height: 170px;
 }
 
-.cardImg{
-    top: 0px;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
+.cardImg {
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
 
-    border-radius: 8px;
-    object-fit: cover;
-    
-    object-position: center;
-    display: block;
+  border-radius: 8px;
+  object-fit: cover;
 
-    max-width: 100%;
+  object-position: center;
+  display: block;
+
+  max-width: 100%;
 }

@@ -1,15 +1,17 @@
-import { isNewUser, createNewUser } from "../../lib/db/hasura";
-import { magicAdmin } from "../../lib/magic";
 import jwt from "jsonwebtoken";
-import { setTokenCookie } from "../../lib/cookie";
 
-export default async function (req, res) {
+import { magicAdmin } from "../../lib/magic";
+import { setTokenCookie } from "../../lib/cookies";
+import { createNewUser, isNewUser } from "../../lib/db/hasura";
+
+export default async function login(req, res) {
   if (req.method === "POST") {
     try {
       const auth = req.headers.authorization;
       const didToken = auth ? auth.substr(7) : "";
 
       const metaData = await magicAdmin.users.getMetadataByToken(didToken);
+
       const token = jwt.sign(
         {
           ...metaData,
@@ -25,20 +27,14 @@ export default async function (req, res) {
       );
 
       const isNewUserQuery = await isNewUser(token, metaData.issuer);
-
       isNewUserQuery && (await createNewUser(token, metaData));
-
-      const cookie = setTokenCookie(token, res);
-
+      setTokenCookie(token, res);
       res.send({ done: true });
     } catch (error) {
-      console.error("something went wrong in logging in", error);
-      res.status(500).send({
-        done: false,
-        message: `Sometshing went wrong in logging in, ${error}`,
-      });
+      console.error("Something went wrong logging in", error);
+      res.status(500).send({ done: false });
     }
   } else {
-    res.send({ done: false, message: "method is not POST" });
+    res.send({ done: false });
   }
 }
