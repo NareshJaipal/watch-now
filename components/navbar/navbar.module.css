@@ -282,10 +282,7 @@
 
 .linkName {
   display: block;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding: 4px;
 
   font-size: 1rem;
   line-height: 1.25rem;
@@ -294,6 +291,31 @@
 }
 
 .linkName:hover {
+  text-decoration: underline;
+}
+
+.linkNameEdit {
+  position: relative;
+  display: block;
+  padding: 4px;
+
+  font-size: 1rem;
+  line-height: 1.25rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.linkNameEdit::after {
+  position: absolute;
+  content: "";
+  height: 6px;
+  width: 6px;
+  margin-left: 3px;
+  background-color: #009261;
+  border-radius: 50%;
+}
+
+.linkNameEdit:hover {
   text-decoration: underline;
 }
 

@@ -32,6 +32,7 @@ const Favorite = ({ watchItAgainVideos, favoritedVideos }) => {
           <SectionCard
             title="Watch it again"
             videos={watchItAgainVideos}
+            icon={"/static/icons/title/again.svg"}
             size="normal"
           />
         </div>
@@ -40,6 +41,7 @@ const Favorite = ({ watchItAgainVideos, favoritedVideos }) => {
           <SectionCard
             title="Liked Videos"
             videos={favoritedVideos}
+            icon={"/static/icons/title/liked.svg"}
             size="normal"
           />
         </div>

@@ -4,11 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 const Card = (props) => {
-  const {
-    imgUrl = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1450&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    size = "normal",
-    id,
-  } = props;
+  const { imgUrl, size = "normal", id, videoId } = props;
 
   const [imgSrc, setImgSrc] = useState(imgUrl);
 
@@ -18,9 +14,13 @@ const Card = (props) => {
   };
 
   const handleImgError = () => {
-    setImgSrc(
-      "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1450&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    );
+    if (imgSrc !== `https://img.youtube.com/vi/${videoId}/sddefault.jpg`) {
+      setImgSrc(`https://img.youtube.com/vi/${videoId}/sddefault.jpg`);
+    } else {
+      setImgSrc(
+        "https://plus.unsplash.com/premium_photo-1682125771198-f7cbed7cb868?q=80&w=1460&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      );
+    }
   };
 
   const scale = id === 0 ? { scaleY: 1.1 } : { scale: 1.1 };
@@ -37,7 +37,7 @@ const Card = (props) => {
           layout="fill"
           onError={handleImgError}
           alt="Thumnail"
-          priority="false"
+          // priority="false"
         />
       </motion.div>
     </div>

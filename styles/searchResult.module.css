@@ -1,33 +1,43 @@
-.container{
-    color: var(--blue20);
-    background-color: --var(--black50);
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-top: 1.5rem;
+.container {
+  color: var(--blue20);
+  background-color: --var(--black50);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 1.5rem;
 }
 
-.title{
-    color: #0d0d0d;
-    font-weight: 700;
-    font-size: 2rem;
+.titleWrapper {
+  display: flex;
+  align-items: center;
 }
 
-.cardWrapper{
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    justify-items: center;
-    column-gap: 1.5rem;
-    row-gap: 1.5rem;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-    margin-top: .5rem;
-    margin-bottom: 12px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-} 
+.title {
+  color: #000080;
+  font-weight: 900;
+  font-size: 2rem;
+}
 
-.cardImg:hover{
-    z-index: 50;
+.emoji {
+  margin-right: 6px;
+  object-fit: cover;
+}
+
+.cardWrapper {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  justify-items: center;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 12px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.cardImg:hover {
+  z-index: 50;
 }
 
 @media (min-width: 640px) {
@@ -35,9 +45,9 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-  
+
 @media (min-width: 768px) {
-  .container{
+  .container {
     padding-left: 4rem;
     padding-right: 4rem;
     margin-top: 3rem;

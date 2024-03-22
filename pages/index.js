@@ -39,7 +39,7 @@ export default function Home({
 
         <meta
           name="description"
-          content={`Watch the latest Disney trailers like ${disneyVideos[0].title}, travel vlogs, productivity tips, and more on Watch Now by Naresh Jaipal`}
+          content={`Watch the latest trailers like travel vlogs, productivity tips, and more on Watch Now by Naresh Jaipal`}
         />
       </Head>
       <main className={styles.main}>
@@ -47,20 +47,36 @@ export default function Home({
 
         {/* Sections */}
         <div className={styles.sectionWrapper}>
-          <SectionCard title="Disney" videos={disneyVideos} size="larg" />
+          <SectionCard
+            title="Disney"
+            icon={"/static/icons/title/disney.svg"}
+            videos={disneyVideos}
+            size="larg"
+          />
         </div>
         <div className={styles.sectionWrapper}>
-          <SectionCard title="Travel" videos={travelVideos} size="normal" />
+          <SectionCard
+            title="Travel"
+            videos={travelVideos}
+            icon={"/static/icons/title/travel.svg"}
+            size="normal"
+          />
         </div>
         <div className={styles.sectionWrapper}>
           <SectionCard
             title="Productivity"
             videos={productivityVideos}
+            icon={"/static/icons/title/productivity.svg"}
             size="normal"
           />
         </div>
         <div className={styles.sectionWrapper}>
-          <SectionCard title="Popular" videos={popularVideos} size="normal" />
+          <SectionCard
+            title="Popular"
+            videos={popularVideos}
+            icon={"/static/icons/title/popular.svg"}
+            size="normal"
+          />
         </div>
       </main>
     </>

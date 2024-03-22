@@ -6,6 +6,7 @@ import styles from "../../styles/searchResult.module.css";
 import { getVideos } from "../../lib/videos";
 import Card from "../../components/card/card";
 import Head from "next/head";
+import Image from "next/image";
 
 export async function getServerSideProps(context) {
   const searchQuery = context.query.searchResult;
@@ -17,11 +18,10 @@ export async function getServerSideProps(context) {
   };
 }
 
-const SearchResult = (searchResults) => {
+const SearchResult = ({ searchResults }) => {
   const router = useRouter();
 
   const searchQuery = router.query.searchResult;
-  const searchResult = searchResults.searchResults;
 
   return (
     <div>
@@ -35,14 +35,27 @@ const SearchResult = (searchResults) => {
       <NavBar />
 
       <section className={styles.container}>
-        <h2 className={styles.title}>Search Results: {searchQuery}</h2>
+        <div className={styles.titleWrapper}>
+          <Image
+            className={styles.emoji}
+            src={"/static/icons/title/search.svg"}
+            width={32}
+            height={32}
+            alt="emoji"
+          />
+
+          <h2 className={styles.title}>Results: {searchQuery}</h2>
+        </div>
         <div className={styles.cardWrapper}>
-          {searchResult.map((video) => {
-            return (
-              <Link href={`/watch/${video.id}`}>
-                <Card imgUrl={video.imgUrl} size={"normal"} />
-              </Link>
-            );
+          {searchResults.map((video) => {
+            const videoId = video.id;
+            if (typeof videoId === "string") {
+              return (
+                <Link href={`/watch/${videoId}`} key={videoId}>
+                  <Card imgUrl={video.imgUrl} videoId={videoId} />
+                </Link>
+              );
+            }
           })}
         </div>
       </section>

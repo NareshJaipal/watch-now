@@ -5,10 +5,20 @@
   padding-right: 1rem;
 }
 
+.titleWrapper {
+  display: flex;
+  align-items: center;
+}
+
 .title {
-  color: #0d0d0d;
-  font-weight: 700;
+  color: #000080;
+  font-weight: 900;
   font-size: 2rem;
+}
+
+.emoji {
+  margin-right: 6px;
+  object-fit: cover;
 }
 
 .cardWrapper {

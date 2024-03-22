@@ -7,8 +7,13 @@ import { magic } from "../../lib/magic-client";
 
 import styles from "./navbar.module.css";
 
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
+
 const NavBar = (props) => {
   const { logo = false } = props;
+
+  const { userInfo } = useContext(UserContext);
 
   const [showDropdown, setShowDropdown] = useState("");
   const [dropDownOn, setDropDownOn] = useState(true);
@@ -22,7 +27,7 @@ const NavBar = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [didToken, setDidToken] = useState("");
 
-  const [userProfile, setUserProfile] = useState("");
+  const [userProfile, setUserProfile] = useState(null);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("user name");
   const [phone, setPhone] = useState("");
@@ -33,6 +38,20 @@ const NavBar = (props) => {
   );
   const [nameError, setNameError] = useState("");
 
+  if (userInfo) {
+    if (
+      image !== userInfo.image ||
+      name !== userInfo.name ||
+      phone !== userInfo.phone
+    ) {
+      console.log(userInfo);
+      setName(userInfo.name);
+      setEmail(userInfo.email);
+      setPhone(userInfo.phone);
+      setImage(userInfo.image);
+    }
+  }
+
   const router = useRouter();
 
   const getUserData = async () => {
@@ -42,21 +61,7 @@ const NavBar = (props) => {
       const token = await magic.user.getIdToken();
       setDidToken(token);
       setEmail(userInfo.email);
-
-      const response = await fetch("/api/userInfo", {
-        method: "GET",
-      });
-      const data = await response.json();
-
-      if (data.findUser.length > 0) {
-        const { name, image, phone } = data.findUser[0];
-        setName(name);
-        setPhone(phone);
-        setImage(image);
-        setIsLoading(false);
-      } else {
-        setIsLoading(false);
-      }
+      setIsLoading(false);
     } catch (e) {
       console.error("Error in Meta Data: ", e);
       setIsLoading(false);
@@ -350,7 +355,7 @@ const NavBar = (props) => {
               <div className={styles.emailAddress}>{email}</div>
             </div>
             <div className={styles.signOutWrapper}>
-              <a className={styles.linkName} onClick={handleEditProfile}>
+              <a className={styles.linkNameEdit} onClick={handleEditProfile}>
                 Edit your profile
               </a>
               <hr />
