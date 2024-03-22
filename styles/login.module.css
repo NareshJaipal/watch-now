@@ -5,10 +5,7 @@
   min-height: 100vh;
 
   background-color: var(--black);
-  background-image: linear-gradient(
-      rgb(255 255 255 / 30%),
-      rgb(255 255 255 / 30%)
-    ),
+  background-image: linear-gradient(rgb(0 0 0 / 20%), rgb(0 0 0 / 20%)),
     url("/static/background.jpg");
 }
 
@@ -68,9 +65,15 @@
 .inputEmail {
   padding: 0.5rem;
 
-  color: var(--black30);
+  color: var(--white30);
+  background-color: var(--black50);
+
   width: 100%;
   padding-bottom: 1rem;
+
+  border: none;
+  outline: none;
+  border-radius: 5px;
 
   height: 3rem;
   min-width: 240px;

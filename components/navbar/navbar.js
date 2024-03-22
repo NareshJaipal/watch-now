@@ -38,19 +38,24 @@ const NavBar = (props) => {
   );
   const [nameError, setNameError] = useState("");
 
-  if (userInfo) {
-    if (
-      image !== userInfo.image ||
-      name !== userInfo.name ||
-      phone !== userInfo.phone
-    ) {
-      console.log(userInfo);
-      setName(userInfo.name);
-      setEmail(userInfo.email);
-      setPhone(userInfo.phone);
-      setImage(userInfo.image);
+  const updateUserData = () => {
+    if (userInfo) {
+      if (
+        image !== userInfo.image ||
+        name !== userInfo.name ||
+        phone !== userInfo.phone
+      ) {
+        setName(userInfo.name);
+        setEmail(userInfo.email);
+        setPhone(userInfo.phone);
+        setImage(userInfo.image);
+      }
     }
-  }
+  };
+
+  useEffect(() => {
+    updateUserData();
+  }, [userInfo]);
 
   const router = useRouter();
 
@@ -163,12 +168,20 @@ const NavBar = (props) => {
     e.preventDefault();
 
     setEditProfile(false);
+    setName(userInfo.name);
+    setEmail(userInfo.email);
+    setPhone(userInfo.phone);
+    setImage(userInfo.image);
   };
 
   const handleEditProfileCancelBtn = (e) => {
     e.preventDefault();
 
     setEditProfile(false);
+    setName(userInfo.name);
+    setEmail(userInfo.email);
+    setPhone(userInfo.phone);
+    setImage(userInfo.image);
   };
 
   const handleEditProfileSaveBtn = async (e) => {
@@ -192,9 +205,9 @@ const NavBar = (props) => {
         },
       });
       if (response) {
-        console.log({ response });
         setIsLoading(false);
-        alert("Profile updated successfully");
+        setEditProfile(false);
+        alert("Profile updated successfully please refresh page");
       } else {
         setIsLoading(false);
         alert("Profile updated failed try again");
@@ -207,9 +220,7 @@ const NavBar = (props) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
 
-      if (file.size === 409600) {
-        console.log(file.size);
-
+      if (file.size <= 409600) {
         const reader = new FileReader();
         reader.onloadend = function () {
           setImage(reader.result);
